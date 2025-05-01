@@ -17,7 +17,7 @@ public class ReminderRepository : IReminderRepository
         return reminder;
     }
 
-    public async Task<IEnumerable<Reminder>> GetAllAsync()
+    public async Task<List<Reminder>> GetAllAsync()
     {
         var query = _dbContext.Reminder.AsQueryable();
 

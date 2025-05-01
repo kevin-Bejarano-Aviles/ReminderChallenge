@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReminderChallenge.Repository\ReminderChallenge.Repository.csproj" />
+    <ProjectReference Include="..\ReminderChallenge.Service\ReminderChallenge.Service.csproj" />
   </ItemGroup>
 
 </Project>

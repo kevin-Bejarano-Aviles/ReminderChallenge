@@ -7,7 +7,6 @@ public class Reminder
     public DateTime ExpirationDate { get; set; }
     public string Description { get; set; }
     public int CondominiumId { get; set; }
-
     public DateTime CreateAtUtc { get; private set; }
     public DateTime? UpdatedAtUtc { get; private set; }
     public DateTime? DeletedAtUtc { get; private set; }
@@ -20,7 +19,7 @@ public class Reminder
         CreateAtUtc = DateTime.UtcNow;
     }
 
-    public Reminder Create(
+    public static Reminder Create(
         string typeExpiration,
         DateTime expirationDate,
         string description,
