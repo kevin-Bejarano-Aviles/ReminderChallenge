@@ -14,50 +14,50 @@ public class ReminderController : ControllerBase
 
     }
 
-    [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult> Create()
-    {
+    //[HttpPost]
+    //[ProducesResponseType(StatusCodes.Status201Created)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    //public async Task<ActionResult> Create()
+    //{
 
-    }
+    //}
 
-    [HttpPut("{reminderId}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult> Update()
-    {
+    //[HttpPut("{reminderId}")]
+    //[ProducesResponseType(StatusCodes.Status204NoContent)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    //public async Task<ActionResult> Update()
+    //{
 
-    }
+    //}
 
 
-    [HttpGet("{reminderId}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult> GetById()
-    {
+    //[HttpGet("{reminderId}")]
+    //[ProducesResponseType(StatusCodes.Status200OK)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    //public async Task<ActionResult> GetById()
+    //{
 
-    }
+    //}
 
-    [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult> GetAll()
-    {
+    //[HttpGet]
+    //[ProducesResponseType(StatusCodes.Status200OK)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    //public async Task<ActionResult> GetAll()
+    //{
 
-    }
+    //}
 
-    [HttpDelete("{reminderId}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Delete()
-    {
+    //[HttpDelete("{reminderId}")]
+    //[ProducesResponseType(StatusCodes.Status204NoContent)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+    //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    //public async Task<ActionResult> Delete()
+    //{
 
-    }
+    //}
 }
