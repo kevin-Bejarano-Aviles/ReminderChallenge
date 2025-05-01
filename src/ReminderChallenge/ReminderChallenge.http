@@ -1,6 +1,0 @@
-@ReminderChallenge_HostAddress = http://localhost:5228
-
-GET {{ReminderChallenge_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

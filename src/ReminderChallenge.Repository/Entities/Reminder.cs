@@ -12,5 +12,51 @@ public class Reminder
     public DateTime? UpdatedAtUtc { get; private set; }
     public DateTime? DeletedAtUtc { get; private set; }
 
+
+
+    private Reminder(Guid id)
+    {
+        Id = id;  
+        CreateAtUtc = DateTime.UtcNow;
+    }
+
+    public Reminder Create(
+        string typeExpiration,
+        DateTime expirationDate,
+        string description,
+        int condominiumId
+        )
+    {
+        return new Reminder(Guid.NewGuid())
+        {
+            TypeExpiration = typeExpiration,
+            ExpirationDate = expirationDate,
+            Description = description,
+            CondominiumId = condominiumId
+        };
+    }
     
+    public void Update(
+        string typeExpiration,
+        DateTime expirationDate,
+        string description,
+        int condominiumId
+        )
+    {
+        TypeExpiration = typeExpiration;
+        ExpirationDate = expirationDate;
+        Description = description;
+        CondominiumId = condominiumId;
+
+        MarkAsUpdated();
+    }
+
+    public void SoftDelete()
+    {
+        if (DeletedAtUtc != null)
+            return;
+
+        DeletedAtUtc = DateTime.UtcNow;
+    }
+    private void MarkAsUpdated() => UpdatedAtUtc = DateTime.UtcNow;
 }
