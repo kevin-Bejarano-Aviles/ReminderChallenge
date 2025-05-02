@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReminderChallenge.API.RequestModels.Reminder;
-using ReminderChallenge.Service.Services;
+using ReminderChallenge.Service.Dtos;
+using ReminderChallenge.Service.Services.RemindersService;
 
 namespace ReminderChallenge.API.Controllers.Reminder;
 
@@ -9,11 +10,12 @@ namespace ReminderChallenge.API.Controllers.Reminder;
 public class ReminderController : ControllerBase
 {
     private readonly IReminderService _reminderService;
+    private readonly ILogger<ReminderController> _logger;
 
-
-    public ReminderController(IReminderService reminderService)
+    public ReminderController(IReminderService reminderService, ILogger<ReminderController> logger)
     {
         _reminderService = reminderService;
+        _logger = logger;
     }
 
     [HttpPost]
@@ -22,14 +24,23 @@ public class ReminderController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Create([FromBody] ReminderRequest request, CancellationToken cancellationToken)
     {
-        var resposne = await _reminderService.CreateReminder(
+        try
+        {
+            var resposne = await _reminderService.CreateReminder(
             request.TypeExpiration,
             request.ExpirationDate,
             request.Description,
             request.CondominiumId,
             cancellationToken);
 
-        return Ok(resposne);
+            return Ok(resposne);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+        
     }
 
     [HttpPut("{reminderId}")]
@@ -40,8 +51,9 @@ public class ReminderController : ControllerBase
         Guid reminderId,
         [FromBody] ReminderRequest request, CancellationToken cancellationToken)
     {
-
-        await _reminderService.UpdateReminder(
+        try
+        {
+            await _reminderService.UpdateReminder(
             reminderId,
             request.TypeExpiration,
             request.ExpirationDate,
@@ -50,30 +62,55 @@ public class ReminderController : ControllerBase
             cancellationToken
             );
 
-        return NoContent();
+            return NoContent();
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+        
     }
 
 
     [HttpGet("{reminderId}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ReminderDto), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetById(Guid reminderId, CancellationToken cancellationToken)
     {
-        var response = await _reminderService.GetReminderById(reminderId, cancellationToken);
+        try
+        {
+            var response = await _reminderService.GetReminderById(reminderId, cancellationToken);
 
-        return Ok(response);
+            return Ok(response);
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+        
     }
 
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<ReminderDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> GetAll(CancellationToken cancellationToken)
     {
-        var response = await _reminderService.GetAllReminders(cancellationToken);
+        try
+        {
+            var response = await _reminderService.GetAllReminders(cancellationToken);
 
-        return Ok(response);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+        
     }
 
     [HttpDelete("{reminderId}")]
@@ -83,8 +120,17 @@ public class ReminderController : ControllerBase
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> Delete(Guid reminderId, CancellationToken cancellationToken)
     {
-        await _reminderService.DeleteReminder(reminderId, cancellationToken);
+        try
+        {
+            await _reminderService.DeleteReminder(reminderId, cancellationToken);
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message, ex);
+            return BadRequest(ex.Message);
+        }
+        
     }
 }

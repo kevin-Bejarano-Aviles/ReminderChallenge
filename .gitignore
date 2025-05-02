@@ -483,3 +483,4 @@ $RECYCLE.BIN/
 *.env
 *.db-shm
 *.db-wal
+**/Resources/
