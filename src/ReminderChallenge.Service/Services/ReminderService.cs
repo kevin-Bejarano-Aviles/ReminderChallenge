@@ -2,6 +2,7 @@
 using ReminderChallenge.Repository.Repositories;
 using ReminderChallenge.Service.Dtos;
 using ReminderChallenge.Service.Extensions;
+using ReminderChallenge.Service.Helper;
 
 namespace ReminderChallenge.Service.Services;
 
@@ -16,16 +17,21 @@ public class ReminderService : IReminderService
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<ReminderDto> CreateReminder(
-        string typeExpiration, 
+    public async Task<Guid> CreateReminder(
+        int typeExpiration, 
         DateTime expirationDate, 
         string description, 
         int condominiumId, 
         CancellationToken cancellationToken)
     {
 
+        if (!Enum.IsDefined(typeof(TypeExpirationEnum), typeExpiration))
+            throw new ArgumentException("Tipo de vencimiento invalido");
+
+        var expiration = (TypeExpirationEnum)typeExpiration;
+
         var newReminder = Reminder.Create(
-            typeExpiration,
+            expiration,
             expirationDate, 
             description, 
             condominiumId
@@ -35,7 +41,7 @@ public class ReminderService : IReminderService
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return reminder.ToDto();
+        return reminder.Id;
         
     }
 
@@ -55,16 +61,22 @@ public class ReminderService : IReminderService
 
     public async Task UpdateReminder(
         Guid reminderId,
-        string typeExpiration, 
+        int typeExpiration, 
         DateTime expirationDate, 
         string description, 
         int condominiumId, 
         CancellationToken cancellationToken)
     {
+
+        if (!Enum.IsDefined(typeof(TypeExpirationEnum), typeExpiration))
+            throw new ArgumentException("Tipo de vencimiento invalido");
+
+        var expiration = (TypeExpirationEnum)typeExpiration;
+
         var reminder = await _reminderRepository.GetByIdAsync(reminderId);
 
         reminder.Update(
-        typeExpiration,
+        expiration,
         expirationDate, 
         description, 
         condominiumId);

@@ -1,9 +1,11 @@
-﻿namespace ReminderChallenge.Repository.Entities;
+﻿using ReminderChallenge.Service.Helper;
+
+namespace ReminderChallenge.Repository.Entities;
 
 public class Reminder
 {
     public Guid Id { get; set; }
-    public string TypeExpiration { get; set; }
+    public TypeExpirationEnum TypeExpiration { get; set; }
     public DateTime ExpirationDate { get; set; }
     public string Description { get; set; }
     public int CondominiumId { get; set; }
@@ -20,7 +22,7 @@ public class Reminder
     }
 
     public static Reminder Create(
-        string typeExpiration,
+        TypeExpirationEnum typeExpiration,
         DateTime expirationDate,
         string description,
         int condominiumId
@@ -36,7 +38,7 @@ public class Reminder
     }
     
     public void Update(
-        string typeExpiration,
+        TypeExpirationEnum typeExpiration,
         DateTime expirationDate,
         string description,
         int condominiumId

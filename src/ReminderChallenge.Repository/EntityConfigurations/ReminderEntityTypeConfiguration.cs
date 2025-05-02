@@ -30,6 +30,7 @@ internal class ReminderEntityTypeConfiguration : IEntityTypeConfiguration<Remind
     {
 
         builder.Property(x => x.TypeExpiration)
+            .HasConversion<int>()
             .HasColumnName("expiration_type");
 
         builder.Property(x => x.ExpirationDate)

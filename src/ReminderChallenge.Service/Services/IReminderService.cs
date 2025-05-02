@@ -8,8 +8,8 @@ public interface IReminderService
 
     Task<IEnumerable<ReminderDto>> GetAllReminders(CancellationToken cancellationToken);
 
-    Task<ReminderDto> CreateReminder(
-        string typeExpiration,
+    Task<Guid> CreateReminder(
+        int typeExpiration,
         DateTime expirationDate,
         string description,
         int condominiumId,
@@ -17,7 +17,7 @@ public interface IReminderService
 
     Task UpdateReminder(
         Guid reminderId,
-        string typeExpiration,
+        int typeExpiration,
         DateTime expirationDate,
         string description,
         int condominiumId,

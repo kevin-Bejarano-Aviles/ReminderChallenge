@@ -1,13 +1,10 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ReminderChallenge.Service.Dtos;
+namespace ReminderChallenge.API.RequestModels.Reminder;
 
-public sealed record ReminderDto(
-    [property: JsonPropertyName("recordatorio_id")]
-    Guid id,
-
+public sealed record ReminderRequest(
     [property: JsonPropertyName("tipo_vencimiento")]
-    string TypeExpiration,
+    int TypeExpiration,
 
     [property: JsonPropertyName("fecha_vencimiento")]
     DateTime ExpirationDate,
@@ -17,4 +14,6 @@ public sealed record ReminderDto(
 
     [property: JsonPropertyName("consorcio_id")]
     int CondominiumId
-    );
+);
+
+

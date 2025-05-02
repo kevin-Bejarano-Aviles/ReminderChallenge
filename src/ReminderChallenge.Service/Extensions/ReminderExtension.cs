@@ -9,7 +9,7 @@ public static class ReminderExtension
     {
         return new ReminderDto(
             reminder.Id,
-            reminder.TypeExpiration,
+            reminder.TypeExpiration.ToString(),
             reminder.ExpirationDate,
             reminder.Description,
             reminder.CondominiumId
